@@ -1,10 +1,10 @@
-FROM php:7.1-apache
+FROM php:5.6-apache
 
 MAINTAINER Reivaldo Oliveira <reivaldo@gmail.com>
 
 RUN apt-get update -y && apt-get install --no-install-recommends -y \
        libmcrypt-dev \
-       autoconf g++ make openssl libssl-dev libcurl4-openssl-dev pkg-config libsasl2-dev libpcre3-dev
+       autoconf g++ make openssl libssl-dev libcurl4-openssl-dev pkg-config libsasl2-dev libpcre3-dev zlib1g-dev
 
 RUN rm -r /var/lib/apt/lists/*
 
@@ -19,7 +19,7 @@ COPY ./config/php.ini /usr/local/etc/php/
 
 RUN pecl install mongodb && echo "extension=mongodb.so" > /usr/local/etc/php/php.ini
 
-RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install pdo_mysql zip
 
 RUN docker-php-ext-configure mcrypt && docker-php-ext-install mcrypt
 
@@ -31,5 +31,5 @@ EXPOSE 80
 
 VOLUME ["/var/www/html"]
 
-#docker build -t php7.1-apache2 .
+#docker build -t php5.6-apache2 .
 
