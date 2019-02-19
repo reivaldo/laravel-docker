@@ -23,6 +23,10 @@ RUN docker-php-ext-install pdo_mysql zip
 
 RUN docker-php-ext-configure mcrypt && docker-php-ext-install mcrypt
 
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+RUN composer --version
+
 RUN a2enmod rewrite
 
 RUN service apache2 restart
