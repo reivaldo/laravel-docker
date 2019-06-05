@@ -19,7 +19,7 @@ COPY ./config/php.ini /usr/local/etc/php/
 
 RUN pecl install mongodb && echo "extension=mongodb.so" > /usr/local/etc/php/php.ini
 
-RUN docker-php-ext-install pdo_mysql zip
+RUN docker-php-ext-install pdo_mysql mysqli zip
 
 RUN docker-php-ext-configure mcrypt && docker-php-ext-install mcrypt
 
